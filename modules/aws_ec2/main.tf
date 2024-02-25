@@ -82,13 +82,20 @@ module "ec2_instance" {
 	]
 	user_data = <<-EOF
 				#!/bin/bash
-				sudo apt-get update -y
-				sudo apt-get install -y nodejs npm
-				sudo npm install -g @nestjs/cli
-				nest new project-name
-				cd project-name
-				npm install
-				npm run start:dev
+				curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+				# Carregar o NVM e instalar a última versão do Node.js
+				export NVM_DIR="$HOME/.nvm"
+				[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Carregar o NVM
+				[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Carregar a conclusão do Bash
+
+				nvm install node  # Instalar a última versão do Node.js
+
+				# Instalar o Nest CLI (Command Line Interface) globalmente
+				npm install -g @nestjs/cli
+
+				# Criar um novo projeto Nest.js
+				nest new my-nest-project
 				EOF
 
 	tags = {
