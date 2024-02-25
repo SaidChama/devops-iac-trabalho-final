@@ -1,7 +1,7 @@
 variable "key_name" {
   description = "The name of the key pair to use for the EC2 instances"
   type        = string
-  default     = "notebook_key_pair"
+  default     = "desktop_deployer_key"
 
 }
 
